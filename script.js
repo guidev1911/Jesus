@@ -127,10 +127,17 @@ function atualizarIdioma() {
   btn1.textContent = t.btn1;
   btn2.textContent = t.btn2;
   frase.textContent = "";
+
+  title.style.display = "";
+  btn1.style.display = "";
+  btn2.style.display = "";
+  frase.classList.remove("final-message");
+
   btn1.disabled = false;
   btn2.disabled = false;
   btn2.classList.add("hidden");
   restartBtn.classList.add("hidden"); 
+
   index = 0;
 }
 
