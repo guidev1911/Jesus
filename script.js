@@ -14,7 +14,7 @@ const title = document.getElementById("title");
 const langSelect = document.getElementById("lang");
 const restartBtn = document.getElementById("restart"); 
 
-const textos = {
+const textos = {  
   pt: {
     title: "Jesus",
     btn1: "Quem é Jesus?",
@@ -27,6 +27,18 @@ const textos = {
       "Para o morto, Jesus é a vida.",
       "Para o prisioneiro, Jesus é a liberdade.",
       "Para o solitário, Jesus é o amigo.",
+      "Para o viajante, Jesus é o caminho.",
+      "Para o sábio, Jesus é sabedoria.",
+      "Para a medicina, Jesus é o médico dos médicos.",
+      "Para o réu, Jesus é o advogado.",
+      "Para o advogado, Jesus é o juiz.",
+      "Para o juiz, Jesus é a justiça.",
+      "Para o cansado, Jesus é o alívio.",
+      "Para o mentiroso, Jesus é a verdade.",
+      "Para o perdido, Jesus é o salvador.",
+      "Jesus é o caminho",
+      "a verdade",
+      "e a vida",
       "E para mim...",
       "Jesus é tudo."
     ]
@@ -43,6 +55,18 @@ const textos = {
       "For the dead, Jesus is life.",
       "For the prisoner, Jesus is freedom.",
       "For the lonely, Jesus is the friend.",
+      "For the traveler, Jesus is the way.",
+      "For the wise, Jesus is wisdom.",
+      "For medicine, Jesus is the physician of physicians.",
+      "For the accused, Jesus is the lawyer.",
+      "For the lawyer, Jesus is the judge.",
+      "For the judge, Jesus is justice.",
+      "For the weary, Jesus is relief.",
+      "For the liar, Jesus is the truth.",
+      "For the lost, Jesus is the savior.",
+      "Jesus is the way",
+      "the truth",
+      "and the life",
       "And for me...",
       "Jesus is everything."
     ]
@@ -59,6 +83,18 @@ const textos = {
       "Para el muerto, Jesús es la vida.",
       "Para el prisionero, Jesús es la libertad.",
       "Para el solitario, Jesús es el amigo.",
+      "Para el viajero, Jesús es el camino.",
+      "Para el sabio, Jesús es la sabiduría.",
+      "Para la medicina, Jesús es el médico de los médicos.",
+      "Para el reo, Jesús es el abogado.",
+      "Para el abogado, Jesús es el juez.",
+      "Para el juez, Jesús es la justicia.",
+      "Para el cansado, Jesús es el alivio.",
+      "Para el mentiroso, Jesús es la verdad.",
+      "Para el perdido, Jesús es el salvador.",
+      "Jesús es el camino",
+      "la verdad",
+      "y la vida",
       "Y para mí...",
       "Jesús lo es todo."
     ]
