@@ -1,0 +1,130 @@
+:root {
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  color: #111;
+}
+
+.wrap {
+  text-align: center;
+  padding: 32px 24px 28px;
+  max-width: 560px;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 6vw, 3rem);
+  transition: all 0.3s ease;
+}
+
+p.frase {
+  min-height: 2.2em;
+  margin: 16px 0 8px;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.final-message {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  appearance: none;
+  border: 0;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.08s ease, opacity 0.2s ease, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hidden {
+  display: none;
+}
+
+.lang-menu {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.9rem;
+  background: #111;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.lang-menu select {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.lang-menu select option {
+  color: #111;
+  background: #fff;
+}
+
+.typing {
+  border-right: 2px solid #111;
+  display: inline-block;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+#restart {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  background: transparent;
+  color: #111;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+#restart:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}

@@ -4,106 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Quem é Jesus?</title>
-    <style>
-      :root {
-        --radius: 14px;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        background: #fff;
-        display: grid;
-        place-items: center;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
-          Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji",
-          "Segoe UI Emoji";
-        color: #111;
-      }
-      .wrap {
-        text-align: center;
-        padding: 32px 24px 28px;
-        max-width: 560px;
-      }
-      h1 {
-        margin: 0 0 16px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        font-size: clamp(2rem, 6vw, 3rem);
-        transition: all 0.3s ease;
-      }
-      p.frase {
-        min-height: 2.2em;
-        margin: 16px 0 8px;
-        font-size: 1.25rem;
-        transition: all 0.3s ease;
-      }
-      .final-message {
-        font-size: clamp(3rem, 10vw, 6rem);
-        font-weight: 900;
-        margin-top: 20px;
-        text-align: center;
-      }
-      button {
-        appearance: none;
-        border: 0;
-        padding: 12px 18px;
-        border-radius: var(--radius);
-        background: #111;
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.08s ease, opacity 0.2s ease, box-shadow 0.2s;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-      }
-      button:hover {
-        transform: translateY(-1px);
-      }
-      button:active {
-        transform: translateY(0);
-      }
-      button:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-      .hidden {
-        display: none;
-      }
-      .lang-menu {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        font-size: 0.9rem;
-        background: #111;
-        color: #fff;
-        padding: 6px 10px;
-        border-radius: var(--radius);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      }
-      .lang-menu select {
-        background: transparent;
-        color: #fff;
-        border: none;
-        font-weight: 600;
-        outline: none;
-        cursor: pointer;
-        appearance: none;
-      }
-      .lang-menu select option {
-        color: #111;
-        background: #fff;
-      }
-      .typing {
-        border-right: 2px solid #111;
-        display: inline-block;
-        animation: blink 0.7s steps(1) infinite;
-      }
-      @keyframes blink {
-        50% { border-color: transparent; }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="lang-menu">
@@ -116,144 +17,17 @@
     </div>
 
     <main class="wrap">
-      <h1 id="title">Jesus</h1>
+    <h1 id="title">Jesus</h1>
 
-      <button id="btn1" aria-describedby="frase">Quem é Jesus?</button>
+    <button id="btn1" aria-describedby="frase">Quem é Jesus?</button>
 
-      <p id="frase" class="frase" aria-live="polite"></p>
+    <p id="frase" class="frase" aria-live="polite"></p>
 
-      <button id="btn2" class="hidden">Prosseguir</button>
+    <button id="btn2" class="hidden">Prosseguir</button>
+
+    <button id="restart" class="hidden">↺</button>
     </main>
 
-    <script>
-      const btn1 = document.getElementById("btn1");
-      const btn2 = document.getElementById("btn2");
-      const frase = document.getElementById("frase");
-      const title = document.getElementById("title");
-      const langSelect = document.getElementById("lang");
-
-      const textos = {
-        pt: {
-          title: "Jesus",
-          btn1: "Quem é Jesus?",
-          btn2: "Prosseguir",
-          frases: [
-            "Para o cego, Jesus é a Luz.",
-            "Para o faminto, Jesus é o pão.",
-            "Para o sedento, Jesus é a água da vida.",
-            "Para o enfermo, Jesus é a cura.",
-            "Para o morto, Jesus é a vida.",
-            "Para o prisioneiro, Jesus é a liberdade.",
-            "Para o solitário, Jesus é o amigo.",
-            "E para mim...",
-            "Jesus é tudo."
-          ]
-        },
-        en: {
-          title: "Jesus",
-          btn1: "Who is Jesus?",
-          btn2: "Next",
-          frases: [
-            "For the blind, Jesus is the Light.",
-            "For the hungry, Jesus is the bread.",
-            "For the thirsty, Jesus is the living water.",
-            "For the sick, Jesus is the cure.",
-            "For the dead, Jesus is life.",
-            "For the prisoner, Jesus is freedom.",
-            "For the lonely, Jesus is the friend.",
-            "And for me...",
-            "Jesus is everything."
-          ]
-        },
-        es: {
-          title: "Jesús",
-          btn1: "¿Quién es Jesús?",
-          btn2: "Siguiente",
-          frases: [
-            "Para el ciego, Jesús es la Luz.",
-            "Para el hambriento, Jesús es el pan.",
-            "Para el sediento, Jesús es el agua de vida.",
-            "Para el enfermo, Jesús es la cura.",
-            "Para el muerto, Jesús es la vida.",
-            "Para el prisionero, Jesús es la libertad.",
-            "Para el solitario, Jesús es el amigo.",
-            "Y para mí...",
-            "Jesús lo es todo."
-          ]
-        }
-      };
-
-      let lang = "pt";
-      let index = 0;
-      let typingTimeout;
-
-      function typeWriter(text, element, callback) {
-        clearTimeout(typingTimeout);
-        element.textContent = "";
-        let i = 0;
-        function typing() {
-          if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            typingTimeout = setTimeout(typing, 40);
-          } else if (callback) {
-            callback();
-          }
-        }
-        typing();
-      }
-
-      function atualizarIdioma() {
-        const t = textos[lang];
-        title.textContent = t.title;
-        btn1.textContent = t.btn1;
-        btn2.textContent = t.btn2;
-        frase.textContent = "";
-        btn1.disabled = false;
-        btn2.disabled = false;
-        btn2.classList.add("hidden");
-        index = 0;
-      }
-
-      btn1.addEventListener("click", () => {
-        typeWriter(textos[lang].frases[index], frase);
-        btn2.classList.remove("hidden");
-        btn1.disabled = true;
-      });
-
-      btn2.addEventListener("click", () => {
-        index++;
-        const frases = textos[lang].frases;
-        if (index < frases.length) {
-          const currentFrase = frases[index];
-          if (/E para mim|And for me|Y para mí/.test(currentFrase)) {
-            typeWriter(currentFrase, frase);
-          } else if (/Jesus é tudo|Jesus is everything|Jesús lo es todo/.test(currentFrase)) {
-              title.style.display = "none";
-              btn1.style.display = "none";
-              btn2.style.display = "none";
-              frase.classList.add("final-message");
-              typeWriter(currentFrase, frase);
-          } else {
-            typeWriter(currentFrase, frase);
-          }
-        }
-        if (index === frases.length - 1) {
-          btn2.disabled = true;
-        }
-      });
-
-      langSelect.addEventListener("change", (e) => {
-        lang = e.target.value;
-        atualizarIdioma();
-      });
-
-      const userLang = navigator.language.slice(0,2);
-      if (textos[userLang]) {
-        lang = userLang;
-        langSelect.value = userLang;
-      }
-      atualizarIdioma();
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
