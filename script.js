@@ -1,3 +1,12 @@
+function setVh() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVh();
+window.addEventListener('resize', setVh);
+
+
 const btn1 = document.getElementById("btn1");
 const btn2 = document.getElementById("btn2");
 const frase = document.getElementById("frase");
