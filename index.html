@@ -32,11 +32,19 @@
         font-weight: 800;
         letter-spacing: -0.02em;
         font-size: clamp(2rem, 6vw, 3rem);
+        transition: all 0.3s ease;
       }
       p.frase {
-        min-height: 2.2em; /* reserva espaço para as frases */
+        min-height: 2.2em;
         margin: 16px 0 8px;
         font-size: 1.25rem;
+        transition: all 0.3s ease;
+      }
+      .final-message {
+        font-size: clamp(3rem, 10vw, 6rem);
+        font-weight: 900;
+        margin-top: 20px;
+        text-align: center;
       }
       button {
         appearance: none;
@@ -81,11 +89,19 @@
         font-weight: 600;
         outline: none;
         cursor: pointer;
-        appearance: none; /* remove seta e estilos nativos */
+        appearance: none;
       }
       .lang-menu select option {
         color: #111;
         background: #fff;
+      }
+      .typing {
+        border-right: 2px solid #111;
+        display: inline-block;
+        animation: blink 0.7s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% { border-color: transparent; }
       }
     </style>
   </head>
@@ -128,7 +144,9 @@
             "Para o enfermo, Jesus é a cura.",
             "Para o morto, Jesus é a vida.",
             "Para o prisioneiro, Jesus é a liberdade.",
-            "Para o solitário, Jesus é o amigo."
+            "Para o solitário, Jesus é o amigo.",
+            "E para mim...",
+            "Jesus é tudo."
           ]
         },
         en: {
@@ -142,7 +160,9 @@
             "For the sick, Jesus is the cure.",
             "For the dead, Jesus is life.",
             "For the prisoner, Jesus is freedom.",
-            "For the lonely, Jesus is the friend."
+            "For the lonely, Jesus is the friend.",
+            "And for me...",
+            "Jesus is everything."
           ]
         },
         es: {
@@ -156,13 +176,32 @@
             "Para el enfermo, Jesús es la cura.",
             "Para el muerto, Jesús es la vida.",
             "Para el prisionero, Jesús es la libertad.",
-            "Para el solitario, Jesús es el amigo."
+            "Para el solitario, Jesús es el amigo.",
+            "Y para mí...",
+            "Jesús lo es todo."
           ]
         }
       };
 
       let lang = "pt";
       let index = 0;
+      let typingTimeout;
+
+      function typeWriter(text, element, callback) {
+        clearTimeout(typingTimeout);
+        element.textContent = "";
+        let i = 0;
+        function typing() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            typingTimeout = setTimeout(typing, 40);
+          } else if (callback) {
+            callback();
+          }
+        }
+        typing();
+      }
 
       function atualizarIdioma() {
         const t = textos[lang];
@@ -177,17 +216,29 @@
       }
 
       btn1.addEventListener("click", () => {
-        frase.textContent = textos[lang].frases[index];
+        typeWriter(textos[lang].frases[index], frase);
         btn2.classList.remove("hidden");
         btn1.disabled = true;
       });
 
       btn2.addEventListener("click", () => {
         index++;
-        if (index < textos[lang].frases.length) {
-          frase.textContent = textos[lang].frases[index];
+        const frases = textos[lang].frases;
+        if (index < frases.length) {
+          const currentFrase = frases[index];
+          if (/E para mim|And for me|Y para mí/.test(currentFrase)) {
+            typeWriter(currentFrase, frase);
+          } else if (/Jesus é tudo|Jesus is everything|Jesús lo es todo/.test(currentFrase)) {
+              title.style.display = "none";
+              btn1.style.display = "none";
+              btn2.style.display = "none";
+              frase.classList.add("final-message");
+              typeWriter(currentFrase, frase);
+          } else {
+            typeWriter(currentFrase, frase);
+          }
         }
-        if (index === textos[lang].frases.length - 1) {
+        if (index === frases.length - 1) {
           btn2.disabled = true;
         }
       });
